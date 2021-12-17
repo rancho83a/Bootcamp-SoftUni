@@ -30,8 +30,9 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
           authorizeRequests().
           requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll().
 
-          antMatchers("/", "/users/login", "/users/register", "/logger/**").permitAll().
-          antMatchers("/statistics").hasRole(UserRoleEnum.ADMIN.name()).
+          antMatchers("/", "/users/login", "/users/register").permitAll().
+          antMatchers("/img/**").permitAll().
+
           antMatchers("/**").authenticated().
         and().
           formLogin().
@@ -41,7 +42,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
 
           passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY).
 
-            defaultSuccessUrl("/").
+            defaultSuccessUrl("/home").
 
             // the place where I should land if the login is NOT successful
           failureForwardUrl("/users/login-error").

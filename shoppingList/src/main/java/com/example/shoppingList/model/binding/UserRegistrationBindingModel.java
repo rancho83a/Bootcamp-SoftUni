@@ -4,21 +4,22 @@ package com.example.shoppingList.model.binding;
 import com.example.shoppingList.model.validator.UniqueUserName;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 
 public class UserRegistrationBindingModel {
 
 
-  @NotNull
-  @Size(min=4, max=20)
+  @NotBlank
+  @Size(min=3, max=20)
   private String password;
-  @NotNull
-  @Size(min=4, max=20)
+  @NotBlank
+  @Size(min=3, max=20)
   private String confirmPassword;
   @NotBlank
-  @Size(min=4, max=20)
+  @Size(min=3, max=20)
+
+  @NotBlank
   @UniqueUserName
   private String username;
 
