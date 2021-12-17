@@ -112,4 +112,10 @@ public class UserServiceImpl implements UserService {
     public boolean isUserNameFree(String username) {
         return userRepository.findByUsernameIgnoreCase(username).isEmpty();
     }
+
+    @Override
+    public boolean isEmailFree(String email) {
+        return userRepository.findUserEntityByEmail(email).isEmpty();
+
+    }
 }

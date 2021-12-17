@@ -24,7 +24,7 @@ public class UserRegistrationController {
         this.modelMapper = modelMapper;
     }
 
-    @ModelAttribute("userModel")
+    @ModelAttribute("userRegistrationBindingModel")
     public UserRegistrationBindingModel userModel() {
         return new UserRegistrationBindingModel();
     }
@@ -48,7 +48,7 @@ public class UserRegistrationController {
 
 
         if (bindingResult.hasErrors() ) {
-            redirectAttributes.addFlashAttribute("userModel", userRegistrationBindingModel);
+            redirectAttributes.addFlashAttribute("userRegistrationBindingModel", userRegistrationBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegistrationBindingModel", bindingResult);
             return "redirect:/users/register";
         }
@@ -57,12 +57,11 @@ public class UserRegistrationController {
 
         if ( !isPasswordConfirm) {
 
-            redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegistrationBindingModel);
+            redirectAttributes.addFlashAttribute("userRegistrationBindingModel", userRegistrationBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegistrationBindingModel", bindingResult);
             redirectAttributes.addFlashAttribute("isPasswordConfirm", false);
-            return "redirect:registerUser";
+            return "redirect:/users/register";
         }
-
 
 
         UserRegistrationServiceModel userRegistrationServiceModel = modelMapper
@@ -71,6 +70,6 @@ public class UserRegistrationController {
 
         userService.registerAndLoginUser(userRegistrationServiceModel);
 
-        return "redirect:/";
+        return "redirect:/home";
     }
 }
