@@ -49,13 +49,13 @@ public class ProductController {
 
     @GetMapping("/buy/{id}")
     public String buyById(@PathVariable Long id){
-      // productService.buyProduct(id);
+       productService.buyProduct(id);
 
-        return "redirect:/";
+        return "redirect:/home";
     }
     @GetMapping("/buy/all")
     public String buyAll(){
-       // productService.buyAll();
+        productService.buyAll();
 
         return "redirect:/";
     }

@@ -1,12 +1,18 @@
 package com.example.shoppingList.service.impl;
 
 import com.example.shoppingList.model.entity.ProductEntity;
+import com.example.shoppingList.model.entity.enums.CategoryEnum;
 import com.example.shoppingList.model.service.ProductServiceModel;
 import com.example.shoppingList.repository.ProductRepository;
 import com.example.shoppingList.service.CategoryService;
 import com.example.shoppingList.service.ProductService;
+import com.example.shoppingList.web.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -27,5 +33,32 @@ public class ProductServiceImpl implements ProductService {
         ProductEntity product = modelMapper.map(productServiceModel, ProductEntity.class);
         product.setCategory(categoryService.findCategoryByCategoryNameEnum(productServiceModel.getCategory()));
         this.productRepository.save(product);
+    }
+
+    @Override
+    public List<ProductServiceModel> getAllProductsByCategory(CategoryEnum food) {
+
+        return this.productRepository.findAllByCategory_Name(food)
+                .stream()
+                .map(product-> modelMapper.map(product, ProductServiceModel.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public BigDecimal getTotalSum() {
+       return this.productRepository.getTotalSum();
+    }
+
+    @Override
+    public void buyProduct(Long id) {
+        ProductEntity productEntity = this.productRepository.findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException("Sorry, object not found!"));
+
+        this.productRepository.delete(productEntity);
+    }
+
+    @Override
+    public void buyAll() {
+        this.productRepository.deleteAll();
     }
 }

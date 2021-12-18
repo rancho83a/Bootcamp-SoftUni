@@ -14,6 +14,8 @@ public class ProductAddBindingModel {
     private String description;
 
     @Positive(message = "Price value must be positive")
+    @NotNull(message = "Price can not be empty")
+
     private BigDecimal price;
 
     @FutureOrPresent(message = "Date and Time, that cannot be in the past")
