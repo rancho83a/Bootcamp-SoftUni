@@ -5,7 +5,7 @@ import com.example.shoppingList.service.UserService;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class UniqueEmailValidator implements ConstraintValidator<UniqueUserName, String> {
+public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, String> {
 
   private final UserService userService;
 

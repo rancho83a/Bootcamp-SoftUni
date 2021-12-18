@@ -12,6 +12,7 @@ import javax.validation.constraints.Size;
 public class UserRegistrationBindingModel {
 
     @Email
+    @NotBlank
     @UniqueEmail
     private String email;
 
