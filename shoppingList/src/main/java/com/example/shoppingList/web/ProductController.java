@@ -4,12 +4,16 @@ import com.example.shoppingList.model.binding.ProductAddBindingModel;
 import com.example.shoppingList.model.service.ProductServiceModel;
 import com.example.shoppingList.service.ProductService;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/products")
@@ -58,6 +62,13 @@ public class ProductController {
         productService.buyAll();
 
         return "redirect:/";
+    }
+
+    @PreAuthorize("isOwner(#id)")
+    @GetMapping("/edit/{id}")
+    public String editById(@PathVariable Long id, @AuthenticationPrincipal UserDetails currentUser){
+
+        return "product-edit";
     }
 }
 

@@ -4,9 +4,9 @@ spring:
     url: "jdbc:mysql://localhost:3306/shopping_list_bootcamp?useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC"
     username: root
     password: mypass
-  sql:
-    init:
-      mode: always
+#  sql:
+#    init:
+#      mode: always
       #mode: never
   jpa:
     # Choose either MySQL 8 or MySQL 5 below
@@ -15,7 +15,7 @@ spring:
     #For MySQL 5
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     open-in-view: false
     properties:
       hibernate:
@@ -30,5 +30,9 @@ logging:
   level:
     org.hibernate.SQL: DEBUG
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+
+
+
 
 

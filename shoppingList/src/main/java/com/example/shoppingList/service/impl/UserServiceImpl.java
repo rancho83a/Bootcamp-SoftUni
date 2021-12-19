@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -117,5 +118,18 @@ public class UserServiceImpl implements UserService {
     public boolean isEmailFree(String email) {
         return userRepository.findUserEntityByEmail(email).isEmpty();
 
+    }
+
+    @Override
+    public Optional<UserEntity> findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public boolean isAdmin(UserEntity currentUser) {
+        return currentUser.getRoles()
+                .stream()
+                .map(UserRoleEntity::getRole)
+                .anyMatch(r -> r == UserRoleEnum.ADMIN);
     }
 }

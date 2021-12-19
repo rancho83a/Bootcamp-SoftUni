@@ -1,17 +1,21 @@
 package com.example.shoppingList.service.impl;
 
 import com.example.shoppingList.model.entity.ProductEntity;
+import com.example.shoppingList.model.entity.UserEntity;
 import com.example.shoppingList.model.entity.enums.CategoryEnum;
 import com.example.shoppingList.model.service.ProductServiceModel;
 import com.example.shoppingList.repository.ProductRepository;
 import com.example.shoppingList.service.CategoryService;
 import com.example.shoppingList.service.ProductService;
+import com.example.shoppingList.service.UserService;
 import com.example.shoppingList.web.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,12 +23,14 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final ModelMapper modelMapper;
     private final CategoryService categoryService;
+    private final UserService userService;
 
-    public ProductServiceImpl(ProductRepository productRepository, ModelMapper modelMapper, CategoryService categoryService) {
+    public ProductServiceImpl(ProductRepository productRepository, ModelMapper modelMapper, CategoryService categoryService, UserService userService) {
         this.productRepository = productRepository;
         this.modelMapper = modelMapper;
 
         this.categoryService = categoryService;
+        this.userService = userService;
     }
 
     @Override
@@ -60,5 +66,23 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void buyAll() {
         this.productRepository.deleteAll();
+    }
+
+    @Transactional
+    @Override
+    public boolean isOwner(String username, Long id) {
+
+
+
+        Optional<ProductEntity> productOpt = productRepository.findById(id);
+        Optional<UserEntity> currentUserOpt = userService.findByUsername(username);
+
+        if (productOpt.isEmpty() || currentUserOpt.isEmpty()) {
+            return false;
+        }
+        UserEntity currentUser = currentUserOpt.get();
+
+
+        return userService.isAdmin(currentUser);
     }
 }

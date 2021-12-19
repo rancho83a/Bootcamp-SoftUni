@@ -17,4 +17,6 @@ public interface ProductService {
     void buyProduct(Long id);
 
     void buyAll();
+
+    boolean isOwner(String userName, Long id);
 }
