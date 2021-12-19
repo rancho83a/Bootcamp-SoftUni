@@ -6,6 +6,7 @@ import bg.bootCamp.recrutmentTool.model.dto.SkillDto;
 import bg.bootCamp.recrutmentTool.model.entity.CandidateEntity;
 import bg.bootCamp.recrutmentTool.model.entity.RecruiterEntity;
 import bg.bootCamp.recrutmentTool.model.entity.SkillEntity;
+import bg.bootCamp.recrutmentTool.model.view.CandidateViewModel;
 import bg.bootCamp.recrutmentTool.repository.CandidateRepository;
 import bg.bootCamp.recrutmentTool.repository.RecruiterRepository;
 import bg.bootCamp.recrutmentTool.repository.SkillRepository;
@@ -15,8 +16,10 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class CandidateServiceImpl implements CandidateService {
@@ -35,16 +38,16 @@ public class CandidateServiceImpl implements CandidateService {
     }
 
     @Override
-    public long createCandidate(CandidateDto candidateDto) {
+    public Long createCandidate(CandidateViewModel candidateViewModel) {
 
         CandidateEntity candidate = new CandidateEntity()
-                .setFirstName(candidateDto.getFirstName())
-                .setLastName(candidateDto.getLastName())
-                .setEmail(candidateDto.getEmail())
-                .setBirthDate(candidateDto.getBirthDate())
-                .setBio(candidateDto.getBio());
+                .setFirstName(candidateViewModel.getFirstName())
+                .setLastName(candidateViewModel.getLastName())
+                .setEmail(candidateViewModel.getEmail())
+                .setBirthDate(candidateViewModel.getBirthDate())
+                .setBio(candidateViewModel.getBio());
 
-        Set<SkillDto> skillsDto = candidateDto.getSkills();
+        Set<SkillDto> skillsDto = candidateViewModel.getSkills();
 
         Set<SkillEntity> candidateSkills = new HashSet<>();
 
@@ -66,7 +69,7 @@ public class CandidateServiceImpl implements CandidateService {
         candidate.setSkills(candidateSkills);
 
 
-        RecruiterDto recruiterDto = candidateDto.getRecruiter();
+        RecruiterDto recruiterDto = candidateViewModel.getRecruiter();
 
         Optional<RecruiterEntity> recruiterOpt = this.recruiterRepository.findByEmailAndLastName(recruiterDto.getEmail(),
                 recruiterDto.getLastName());
@@ -98,8 +101,8 @@ public class CandidateServiceImpl implements CandidateService {
 
     @Transactional
     @Override
-    public Optional<CandidateDto> getCandidateById(Long id) {
-        return this.candidateRepository.findById(id).map(this::mapToCandidateDto);
+    public Optional<CandidateViewModel> getCandidateById(Long id) {
+        return this.candidateRepository.findById(id).map(this::mapToCandidateViewModel);
     }
 
     @Override
@@ -155,7 +158,19 @@ public class CandidateServiceImpl implements CandidateService {
         return saved.getId();
     }
 
+    @Override
+    public List<CandidateDto> getAllCandidates() {
+        return candidateRepository.findAll()
+                .stream()
+                .map(c->modelMapper.map(c,CandidateDto.class))
+                .collect(Collectors.toList());
+
+    }
+
     private CandidateDto mapToCandidateDto(CandidateEntity candidate) {
         return modelMapper.map(candidate, CandidateDto.class);
+    }
+    private CandidateViewModel     mapToCandidateViewModel(CandidateEntity candidate) {
+        return modelMapper.map(candidate, CandidateViewModel.class);
     }
 }

@@ -3,6 +3,7 @@ package bg.bootCamp.recrutmentTool.web;
 
 import bg.bootCamp.recrutmentTool.model.dto.CandidateDto;
 import bg.bootCamp.recrutmentTool.model.dto.SkillDto;
+import bg.bootCamp.recrutmentTool.model.view.CandidateViewModel;
 import bg.bootCamp.recrutmentTool.service.CandidateService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,10 +23,10 @@ public class CandidateController {
     }
 
     @PostMapping()
-    public ResponseEntity<CandidateDto> create(@RequestBody @Valid CandidateDto candidateDto,
+    public ResponseEntity<CandidateViewModel> create(@RequestBody @Valid CandidateViewModel candidateViewModel,
                                           UriComponentsBuilder uriBuilder) {
 
-        long candidateId = this.candidateService.createCandidate(candidateDto);
+        long candidateId = this.candidateService.createCandidate(candidateViewModel);
 
         URI location = uriBuilder.path("candidates/{id}").buildAndExpand(candidateId).toUri();
 
@@ -35,8 +36,8 @@ public class CandidateController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CandidateDto> getCandidateById(@PathVariable("id") Long id) {
-        Optional<CandidateDto> candidateById = this.candidateService.getCandidateById(id);
+    public ResponseEntity<CandidateViewModel> getCandidateById(@PathVariable("id") Long id) {
+        Optional<CandidateViewModel> candidateById = this.candidateService.getCandidateById(id);
 
         if (candidateById.isEmpty()) {
             return ResponseEntity.notFound().build();

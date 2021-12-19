@@ -6,6 +6,7 @@ import bg.bootCamp.recrutmentTool.model.entity.JobEntity;
 import bg.bootCamp.recrutmentTool.model.entity.SkillEntity;
 import bg.bootCamp.recrutmentTool.repository.JobRepository;
 import bg.bootCamp.recrutmentTool.repository.SkillRepository;
+import bg.bootCamp.recrutmentTool.service.InterviewService;
 import bg.bootCamp.recrutmentTool.service.JobService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -22,12 +23,14 @@ public class JobServiceImpl implements JobService {
     private final JobRepository jobRepository;
     private final ModelMapper modelMapper;
     private final SkillRepository skillRepository;
+    private final InterviewService interviewService;
 
 
-    public JobServiceImpl(JobRepository jobRepository, ModelMapper modelMapper, SkillRepository skillRepository) {
+    public JobServiceImpl(JobRepository jobRepository, ModelMapper modelMapper, SkillRepository skillRepository, InterviewService interviewService) {
         this.jobRepository = jobRepository;
         this.modelMapper = modelMapper;
         this.skillRepository = skillRepository;
+        this.interviewService = interviewService;
     }
 
     @Override
@@ -55,6 +58,11 @@ public class JobServiceImpl implements JobService {
                     }
                 });
         job.setSkills(jobSkills);
+
+        interviewService.createInterview(skillsDto);
+
+
+
 
         JobEntity saved = this.jobRepository.save(job);
 

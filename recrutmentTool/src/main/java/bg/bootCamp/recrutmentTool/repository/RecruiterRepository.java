@@ -16,6 +16,8 @@ Optional<RecruiterEntity> findByEmailAndLastName(String email, String lastName);
 
 @Query("SELECT r FROM RecruiterEntity r WHERE size(r.candidates)>0 ")
 List<RecruiterEntity> findAllWithCandidates();
+
+
 List<RecruiterEntity> findAllByExperienceLevel(int experienceLevel);
 
 

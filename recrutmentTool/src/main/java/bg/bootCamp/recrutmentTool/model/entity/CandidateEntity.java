@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "candidatesS")
+@Table(name = "candidates")
 public class CandidateEntity extends BaseEntity {
 
     @Column(nullable = false)
