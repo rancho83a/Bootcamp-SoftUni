@@ -1,6 +1,6 @@
 package bg.bootCamp.recrutmentTool.service;
 
-import bg.bootCamp.recrutmentTool.model.dto.CandidateDto;
+import bg.bootCamp.recrutmentTool.model.service.CandidateServiceModel;
 import bg.bootCamp.recrutmentTool.model.view.CandidateViewModel;
 
 import java.util.List;
@@ -15,7 +15,7 @@ public interface CandidateService {
 
     void deleteCandidateById(Long id);
 
-    Long updateCandidate(CandidateDto candidateDto);
+    Long updateCandidate(CandidateServiceModel candidateDto);
 
-    List<CandidateDto> getAllCandidates();
+    List<CandidateServiceModel> getAllCandidates();
 }

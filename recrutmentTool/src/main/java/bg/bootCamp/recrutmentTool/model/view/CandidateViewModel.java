@@ -34,7 +34,7 @@ public class CandidateViewModel {
 
     private Set<SkillDto> skills =new HashSet<>();
 
-    private RecruiterDto recruiter;
+    private RecruiterViewModel recruiter;
 
 
 
@@ -92,11 +92,11 @@ public class CandidateViewModel {
         return this;
     }
 
-    public RecruiterDto getRecruiter() {
+    public RecruiterViewModel getRecruiter() {
         return recruiter;
     }
 
-    public CandidateViewModel setRecruiter(RecruiterDto recruiter) {
+    public CandidateViewModel setRecruiter(RecruiterViewModel recruiter) {
         this.recruiter = recruiter;
         return this;
     }

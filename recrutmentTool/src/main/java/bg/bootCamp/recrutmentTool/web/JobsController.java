@@ -1,9 +1,7 @@
 package bg.bootCamp.recrutmentTool.web;
 
 
-import bg.bootCamp.recrutmentTool.model.dto.CandidateDto;
 import bg.bootCamp.recrutmentTool.model.dto.JobDto;
-import bg.bootCamp.recrutmentTool.model.dto.RecruiterWithLevelDto;
 import bg.bootCamp.recrutmentTool.service.JobService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

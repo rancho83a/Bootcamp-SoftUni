@@ -1,6 +1,5 @@
 package bg.bootCamp.recrutmentTool.repository;
 
-import bg.bootCamp.recrutmentTool.model.dto.RecruiterDto;
 import bg.bootCamp.recrutmentTool.model.entity.RecruiterEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

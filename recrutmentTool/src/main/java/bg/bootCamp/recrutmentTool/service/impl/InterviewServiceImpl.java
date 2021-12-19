@@ -1,6 +1,6 @@
 package bg.bootCamp.recrutmentTool.service.impl;
 
-import bg.bootCamp.recrutmentTool.model.dto.CandidateDto;
+import bg.bootCamp.recrutmentTool.model.service.CandidateServiceModel;
 import bg.bootCamp.recrutmentTool.model.dto.SkillDto;
 import bg.bootCamp.recrutmentTool.repository.InterviewRepository;
 import bg.bootCamp.recrutmentTool.service.CandidateService;
@@ -23,7 +23,7 @@ public class InterviewServiceImpl implements InterviewService {
     @Override
     public void createInterview(Set<SkillDto> skillsDto) {
 
-        List<CandidateDto> allCandidates = candidateService.getAllCandidates();
+        List<CandidateServiceModel> allCandidates = candidateService.getAllCandidates();
 
 //        skillsDto.forEach(skill->{
 //

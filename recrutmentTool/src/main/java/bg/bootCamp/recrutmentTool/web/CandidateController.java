@@ -1,8 +1,7 @@
 package bg.bootCamp.recrutmentTool.web;
 
 
-import bg.bootCamp.recrutmentTool.model.dto.CandidateDto;
-import bg.bootCamp.recrutmentTool.model.dto.SkillDto;
+import bg.bootCamp.recrutmentTool.model.service.CandidateServiceModel;
 import bg.bootCamp.recrutmentTool.model.view.CandidateViewModel;
 import bg.bootCamp.recrutmentTool.service.CandidateService;
 import org.springframework.http.ResponseEntity;
@@ -47,20 +46,20 @@ public class CandidateController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<CandidateDto> delete(@PathVariable("id") Long id) {
+    public ResponseEntity<CandidateServiceModel> delete(@PathVariable("id") Long id) {
         candidateService.deleteCandidateById(id);
 
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CandidateDto> update(
+    public ResponseEntity<CandidateServiceModel> update(
             @PathVariable("id") Long id,
-            @RequestBody CandidateDto candidateDto,
+            @RequestBody CandidateServiceModel candidateServiceModel,
             UriComponentsBuilder uriBuilder
     ) {
-        candidateDto.setId(id);
-        Long candidateId = this.candidateService.updateCandidate(candidateDto);
+        candidateServiceModel.setId(id);
+        Long candidateId = this.candidateService.updateCandidate(candidateServiceModel);
 
         URI location = uriBuilder.path("candidates/{id}").buildAndExpand(candidateId).toUri();
 

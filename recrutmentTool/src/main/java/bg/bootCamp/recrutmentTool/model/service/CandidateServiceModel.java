@@ -1,48 +1,42 @@
-package bg.bootCamp.recrutmentTool.model.dto;
+package bg.bootCamp.recrutmentTool.model.service;
 
 
-import bg.bootCamp.recrutmentTool.model.service.validator.UniqueEmail;
+import bg.bootCamp.recrutmentTool.model.dto.SkillDto;
+import bg.bootCamp.recrutmentTool.model.view.RecruiterViewModel;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Past;
-import javax.validation.constraints.Size;
+
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-public class CandidateDto {
+public class CandidateServiceModel {
 
     private Long id;
 
 
-    @NotBlank
     private String firstName;
-    @NotBlank
+
     private String lastName;
 
 
-    @NotBlank
-    @Email
-    @UniqueEmail
+
     private String email;
 
-    @NotBlank
-    @Size(min=10)
+
     private String bio;
 
-    @Past
+
     private LocalDate birthDate;
 
     private Set<SkillDto> skills =new HashSet<>();
 
-    private RecruiterDto recruiter;
+    private RecruiterViewModel recruiter;
 
-    public RecruiterDto getRecruiter() {
+    public RecruiterViewModel getRecruiter() {
         return recruiter;
     }
 
-    public CandidateDto setRecruiter(RecruiterDto recruiter) {
+    public CandidateServiceModel setRecruiter(RecruiterViewModel recruiter) {
         this.recruiter = recruiter;
         return this;
     }
@@ -54,7 +48,7 @@ public class CandidateDto {
         return id;
     }
 
-    public CandidateDto setId(Long id) {
+    public CandidateServiceModel setId(Long id) {
         this.id = id;
         return this;
     }
@@ -63,7 +57,7 @@ public class CandidateDto {
         return firstName;
     }
 
-    public CandidateDto setFirstName(String firstName) {
+    public CandidateServiceModel setFirstName(String firstName) {
         this.firstName = firstName;
         return this;
     }
@@ -72,7 +66,7 @@ public class CandidateDto {
         return lastName;
     }
 
-    public CandidateDto setLastName(String lastName) {
+    public CandidateServiceModel setLastName(String lastName) {
         this.lastName = lastName;
         return this;
     }
@@ -81,7 +75,7 @@ public class CandidateDto {
         return email;
     }
 
-    public CandidateDto setEmail(String email) {
+    public CandidateServiceModel setEmail(String email) {
         this.email = email;
         return this;
     }
@@ -90,7 +84,7 @@ public class CandidateDto {
         return bio;
     }
 
-    public CandidateDto setBio(String bio) {
+    public CandidateServiceModel setBio(String bio) {
         this.bio = bio;
         return this;
     }
@@ -99,7 +93,7 @@ public class CandidateDto {
         return birthDate;
     }
 
-    public CandidateDto setBirthDate(LocalDate birthDate) {
+    public CandidateServiceModel setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
         return this;
     }
@@ -108,7 +102,7 @@ public class CandidateDto {
         return skills;
     }
 
-    public CandidateDto setSkills(Set<SkillDto> skills) {
+    public CandidateServiceModel setSkills(Set<SkillDto> skills) {
         this.skills = skills;
         return this;
     }

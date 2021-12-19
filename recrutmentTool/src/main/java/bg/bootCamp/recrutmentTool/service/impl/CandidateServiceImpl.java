@@ -1,12 +1,12 @@
 package bg.bootCamp.recrutmentTool.service.impl;
 
-import bg.bootCamp.recrutmentTool.model.dto.CandidateDto;
-import bg.bootCamp.recrutmentTool.model.dto.RecruiterDto;
+import bg.bootCamp.recrutmentTool.model.service.CandidateServiceModel;
 import bg.bootCamp.recrutmentTool.model.dto.SkillDto;
 import bg.bootCamp.recrutmentTool.model.entity.CandidateEntity;
 import bg.bootCamp.recrutmentTool.model.entity.RecruiterEntity;
 import bg.bootCamp.recrutmentTool.model.entity.SkillEntity;
 import bg.bootCamp.recrutmentTool.model.view.CandidateViewModel;
+import bg.bootCamp.recrutmentTool.model.view.RecruiterViewModel;
 import bg.bootCamp.recrutmentTool.repository.CandidateRepository;
 import bg.bootCamp.recrutmentTool.repository.RecruiterRepository;
 import bg.bootCamp.recrutmentTool.repository.SkillRepository;
@@ -69,17 +69,17 @@ public class CandidateServiceImpl implements CandidateService {
         candidate.setSkills(candidateSkills);
 
 
-        RecruiterDto recruiterDto = candidateViewModel.getRecruiter();
+        RecruiterViewModel recruiterViewModel = candidateViewModel.getRecruiter();
 
-        Optional<RecruiterEntity> recruiterOpt = this.recruiterRepository.findByEmailAndLastName(recruiterDto.getEmail(),
-                recruiterDto.getLastName());
+        Optional<RecruiterEntity> recruiterOpt = this.recruiterRepository.findByEmailAndLastName(recruiterViewModel.getEmail(),
+                recruiterViewModel.getLastName());
 
         RecruiterEntity recruiter = new RecruiterEntity();
 
         if (recruiterOpt.isEmpty()) {
-            recruiter.setLastName(recruiterDto.getLastName())
-                    .setEmail(recruiterDto.getEmail())
-                    .setCountry(recruiterDto.getCountry())
+            recruiter.setLastName(recruiterViewModel.getLastName())
+                    .setEmail(recruiterViewModel.getEmail())
+                    .setCountry(recruiterViewModel.getCountry())
                     .setExperienceLevel(1)
                     .setInterviewSlot(0);
 
@@ -116,7 +116,7 @@ public class CandidateServiceImpl implements CandidateService {
     }
 
     @Override
-    public Long updateCandidate(CandidateDto candidateDto) {
+    public Long updateCandidate(CandidateServiceModel candidateDto) {
 
         CandidateEntity candidate = candidateRepository.findById(candidateDto.getId()).orElse(null);
         if (candidate == null) {
@@ -159,16 +159,16 @@ public class CandidateServiceImpl implements CandidateService {
     }
 
     @Override
-    public List<CandidateDto> getAllCandidates() {
+    public List<CandidateServiceModel> getAllCandidates() {
         return candidateRepository.findAll()
                 .stream()
-                .map(c->modelMapper.map(c,CandidateDto.class))
+                .map(c->modelMapper.map(c, CandidateServiceModel.class))
                 .collect(Collectors.toList());
 
     }
 
-    private CandidateDto mapToCandidateDto(CandidateEntity candidate) {
-        return modelMapper.map(candidate, CandidateDto.class);
+    private CandidateServiceModel mapToCandidateDto(CandidateEntity candidate) {
+        return modelMapper.map(candidate, CandidateServiceModel.class);
     }
     private CandidateViewModel     mapToCandidateViewModel(CandidateEntity candidate) {
         return modelMapper.map(candidate, CandidateViewModel.class);
