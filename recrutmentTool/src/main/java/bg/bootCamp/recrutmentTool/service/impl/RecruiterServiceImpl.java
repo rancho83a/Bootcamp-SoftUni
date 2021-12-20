@@ -6,11 +6,8 @@ import bg.bootCamp.recrutmentTool.model.entity.RecruiterEntity;
 import bg.bootCamp.recrutmentTool.repository.RecruiterRepository;
 import bg.bootCamp.recrutmentTool.service.RecruiterService;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.domain.Page;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 import java.util.List;
 import java.util.stream.Collectors;

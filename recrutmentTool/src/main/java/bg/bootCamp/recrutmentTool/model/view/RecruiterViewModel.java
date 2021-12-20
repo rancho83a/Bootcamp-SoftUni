@@ -1,7 +1,5 @@
 package bg.bootCamp.recrutmentTool.model.view;
 
-import bg.bootCamp.recrutmentTool.model.dto.RecruiterDto;
-
 public class RecruiterViewModel {
     private String lastName;
     private String email;

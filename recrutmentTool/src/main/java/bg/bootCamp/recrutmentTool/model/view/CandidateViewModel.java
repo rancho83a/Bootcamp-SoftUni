@@ -1,6 +1,5 @@
 package bg.bootCamp.recrutmentTool.model.view;
 
-import bg.bootCamp.recrutmentTool.model.dto.RecruiterDto;
 import bg.bootCamp.recrutmentTool.model.dto.SkillDto;
 import bg.bootCamp.recrutmentTool.model.service.validator.UniqueEmail;
 

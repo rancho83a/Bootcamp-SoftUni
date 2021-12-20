@@ -1,12 +1,14 @@
 package bg.bootCamp.recrutmentTool.service.impl;
 
 import bg.bootCamp.recrutmentTool.model.entity.*;
+import bg.bootCamp.recrutmentTool.model.view.InterviewViewModel;
 import bg.bootCamp.recrutmentTool.repository.InterviewRepository;
 import bg.bootCamp.recrutmentTool.service.InterviewService;
 import bg.bootCamp.recrutmentTool.service.RecruiterService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class InterviewServiceImpl implements InterviewService {
@@ -50,5 +52,15 @@ public class InterviewServiceImpl implements InterviewService {
 
             this.interviewRepository.deleteAll(interviewEntityByJobId);
         }
+    }
+
+    @Override
+    public List<InterviewViewModel> getAllInterviews() {
+       return this.interviewRepository.findAll()
+                .stream()
+                .map(interview-> new InterviewViewModel()
+                        .setJob(interview.getJob().getTitle())
+                        .setCandidateName(interview.getCandidate().getFirstName()+" "+interview.getCandidate().getLastName())
+                        .setRecruiterName(interview.getCandidate().getRecruiter().getLastName())).collect(Collectors.toList());
     }
 }

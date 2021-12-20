@@ -19,7 +19,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class CandidateServiceImpl implements CandidateService {
@@ -161,17 +160,9 @@ public class CandidateServiceImpl implements CandidateService {
     @Override
     public List<CandidateEntity> getAllCandidates() {
         return candidateRepository.findAll();
-
-//                .stream()
-//                .map(c->modelMapper.map(c, CandidateServiceModel.class))
-//                .collect(Collectors.toList());
-
     }
 
-    private CandidateServiceModel mapToCandidateDto(CandidateEntity candidate) {
-        return modelMapper.map(candidate, CandidateServiceModel.class);
-    }
-    private CandidateViewModel     mapToCandidateViewModel(CandidateEntity candidate) {
+    private CandidateViewModel mapToCandidateViewModel(CandidateEntity candidate) {
         return modelMapper.map(candidate, CandidateViewModel.class);
     }
 }
