@@ -8,4 +8,6 @@ public interface InterviewService {
     void save(InterviewEntity interview);
 
     boolean IsExistInterviewWithCandidateAndJob(Long candidateId, Long jobId);
+
+    void deleteAllInterviewForJobWith(Long id);
 }

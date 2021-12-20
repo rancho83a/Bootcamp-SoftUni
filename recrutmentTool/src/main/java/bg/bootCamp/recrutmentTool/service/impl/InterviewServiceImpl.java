@@ -1,28 +1,23 @@
 package bg.bootCamp.recrutmentTool.service.impl;
 
 import bg.bootCamp.recrutmentTool.model.entity.*;
-import bg.bootCamp.recrutmentTool.model.dto.SkillDto;
 import bg.bootCamp.recrutmentTool.repository.InterviewRepository;
-import bg.bootCamp.recrutmentTool.service.CandidateService;
 import bg.bootCamp.recrutmentTool.service.InterviewService;
-import bg.bootCamp.recrutmentTool.service.JobService;
 import bg.bootCamp.recrutmentTool.service.RecruiterService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class InterviewServiceImpl implements InterviewService {
-    public static final int INTERVIEW_SLOTS = 5;
     private final InterviewRepository interviewRepository;
+    private final RecruiterService recruiterService;
 
 
-    public InterviewServiceImpl(InterviewRepository interviewRepository) {
+    public InterviewServiceImpl(InterviewRepository interviewRepository, RecruiterService recruiterService) {
         this.interviewRepository = interviewRepository;
-
+        this.recruiterService = recruiterService;
     }
-
 
 
     @Override
@@ -33,7 +28,27 @@ public class InterviewServiceImpl implements InterviewService {
     @Override
     public boolean IsExistInterviewWithCandidateAndJob(Long candidateId, Long jobId) {
 
-        return this.interviewRepository.findInterviewEntityByCandidate_IdAndJob_Id(candidateId,jobId).isPresent();
+        return this.interviewRepository.findInterviewEntityByCandidate_IdAndJob_Id(candidateId, jobId).isPresent();
 
+    }
+
+    @Override
+    public void deleteAllInterviewForJobWith(Long jobId) {
+        List<InterviewEntity> interviewEntityByJobId = this.interviewRepository.findInterviewEntityByJob_Id(jobId);
+
+        if (!interviewEntityByJobId.isEmpty()) {
+
+            for (InterviewEntity interview : interviewEntityByJobId) {
+                RecruiterEntity recruiter = interview.getCandidate().getRecruiter();
+                if (recruiter.getInterviewSlot() > 0) {
+                    recruiter.setInterviewSlot(recruiter.getInterviewSlot() - 1);
+                    this.recruiterService.save(recruiter);
+                }
+
+            }
+
+
+            this.interviewRepository.deleteAll(interviewEntityByJobId);
+        }
     }
 }

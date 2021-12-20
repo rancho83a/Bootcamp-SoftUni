@@ -21,6 +21,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class JobServiceImpl implements JobService {
+    public static final int INTERVIEW_SLOTS = 5;
+
     private final JobRepository jobRepository;
     private final ModelMapper modelMapper;
     private final SkillRepository skillRepository;
@@ -78,7 +80,7 @@ public class JobServiceImpl implements JobService {
             allCandidates
                     .forEach(candidate -> {
 
-                        //if Candidate don`t have interview for this job (because of previous cheched skill in job, that he have )
+                  //if Candidate don`t have interview for this job (because of previous checked skill in job, that he has )
                         if (!candidateHaveInterviewForThisJobAlready(candidate.getId(),savedJob.getId())) {
 
                             Set<SkillEntity> candidateSkills = candidate.getSkills();
@@ -87,7 +89,7 @@ public class JobServiceImpl implements JobService {
 
                                 if (candidateSkill.getName().equals(skill.getName())) {
                                     RecruiterEntity recruiter = candidate.getRecruiter();
-                                    if (recruiter.getInterviewSlot() < 5) {
+                                    if (recruiter.getInterviewSlot() < INTERVIEW_SLOTS) {
                                         recruiter.setInterviewSlot(recruiter.getInterviewSlot() + 1)
                                                 .setExperienceLevel(recruiter.getExperienceLevel() + 1);
                                         recruiterService.save(recruiter);
@@ -97,7 +99,7 @@ public class JobServiceImpl implements JobService {
                                                 .setJob(savedJob);
                                         this.interviewService.save(interview);
 
-                                        return;
+                                        return; // do not continue compare another candidate skills with already found job Skill
                                     }
                                 }
                             }
@@ -116,6 +118,11 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public void deleteJobById(Long id) {
+
+        //check if there are any interview for this job, if yes-delete interview first
+        this.interviewService.deleteAllInterviewForJobWith(id);
+
+
         this.jobRepository.deleteById(id);
     }
 
