@@ -12,4 +12,5 @@ public interface JobService {
 
     List<JobDto> getJobBySkill(String skill);
 
+    JobEntity getJobById(Long jobId);
 }

@@ -159,11 +159,12 @@ public class CandidateServiceImpl implements CandidateService {
     }
 
     @Override
-    public List<CandidateServiceModel> getAllCandidates() {
-        return candidateRepository.findAll()
-                .stream()
-                .map(c->modelMapper.map(c, CandidateServiceModel.class))
-                .collect(Collectors.toList());
+    public List<CandidateEntity> getAllCandidates() {
+        return candidateRepository.findAll();
+
+//                .stream()
+//                .map(c->modelMapper.map(c, CandidateServiceModel.class))
+//                .collect(Collectors.toList());
 
     }
 

@@ -1,10 +1,12 @@
 package bg.bootCamp.recrutmentTool.service.impl;
 
-import bg.bootCamp.recrutmentTool.model.service.CandidateServiceModel;
+import bg.bootCamp.recrutmentTool.model.entity.*;
 import bg.bootCamp.recrutmentTool.model.dto.SkillDto;
 import bg.bootCamp.recrutmentTool.repository.InterviewRepository;
 import bg.bootCamp.recrutmentTool.service.CandidateService;
 import bg.bootCamp.recrutmentTool.service.InterviewService;
+import bg.bootCamp.recrutmentTool.service.JobService;
+import bg.bootCamp.recrutmentTool.service.RecruiterService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,38 +14,26 @@ import java.util.Set;
 
 @Service
 public class InterviewServiceImpl implements InterviewService {
+    public static final int INTERVIEW_SLOTS = 5;
     private final InterviewRepository interviewRepository;
-    private final CandidateService candidateService;
 
-    public InterviewServiceImpl(InterviewRepository interviewRepository, CandidateService candidateService) {
+
+    public InterviewServiceImpl(InterviewRepository interviewRepository) {
         this.interviewRepository = interviewRepository;
-        this.candidateService = candidateService;
+
+    }
+
+
+
+    @Override
+    public void save(InterviewEntity interview) {
+        this.interviewRepository.save(interview);
     }
 
     @Override
-    public void createInterview(Set<SkillDto> skillsDto) {
+    public boolean IsExistInterviewWithCandidateAndJob(Long candidateId, Long jobId) {
 
-        List<CandidateServiceModel> allCandidates = candidateService.getAllCandidates();
-
-//        skillsDto.forEach(skill->{
-//
-//            allCandidates
-//                    .forEach(candidateDto ->{
-//
-//                        candidateDto.getSkills()
-//                                .forEach(c_skill->{
-//                                    if(c_skill.getName().equals(skill.getName())){
-//                                        candidateService.getCandidateById(id)
-//                                    }
-//                                });
-//
-//                    });
-//
-//
-//
-//
-//      });
-
+        return this.interviewRepository.findInterviewEntityByCandidate_IdAndJob_Id(candidateId,jobId).isPresent();
 
     }
 }

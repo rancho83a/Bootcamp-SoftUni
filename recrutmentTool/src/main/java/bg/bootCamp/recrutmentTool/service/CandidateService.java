@@ -1,5 +1,6 @@
 package bg.bootCamp.recrutmentTool.service;
 
+import bg.bootCamp.recrutmentTool.model.entity.CandidateEntity;
 import bg.bootCamp.recrutmentTool.model.service.CandidateServiceModel;
 import bg.bootCamp.recrutmentTool.model.view.CandidateViewModel;
 
@@ -17,5 +18,5 @@ public interface CandidateService {
 
     Long updateCandidate(CandidateServiceModel candidateDto);
 
-    List<CandidateServiceModel> getAllCandidates();
+    List<CandidateEntity> getAllCandidates();
 }

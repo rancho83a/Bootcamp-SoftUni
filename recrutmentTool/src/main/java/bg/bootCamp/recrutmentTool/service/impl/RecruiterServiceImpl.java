@@ -38,4 +38,9 @@ public class RecruiterServiceImpl implements RecruiterService {
         return allByExperienceLevel.stream().map(r->modelMapper.map(r,RecruiterWithLevelDto.class)).collect(Collectors.toList());
     }
 
+    @Override
+    public void save(RecruiterEntity recruiter) {
+        this.recruiterRepository.save(recruiter);
+    }
+
 }

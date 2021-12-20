@@ -1,9 +1,11 @@
 package bg.bootCamp.recrutmentTool.service;
 
-import bg.bootCamp.recrutmentTool.model.dto.SkillDto;
+import bg.bootCamp.recrutmentTool.model.entity.InterviewEntity;
 
-import java.util.Set;
 
 public interface InterviewService {
-    void createInterview(Set<SkillDto> skillsDto);
+
+    void save(InterviewEntity interview);
+
+    boolean IsExistInterviewWithCandidateAndJob(Long candidateId, Long jobId);
 }
