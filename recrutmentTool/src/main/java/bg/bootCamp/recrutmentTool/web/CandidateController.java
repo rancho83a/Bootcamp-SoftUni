@@ -38,6 +38,8 @@ public class CandidateController {
     public ResponseEntity<CandidateViewModel> getCandidateById(@PathVariable("id") Long id) {
         Optional<CandidateViewModel> candidateById = this.candidateService.getCandidateById(id);
 
+
+        //error handling
         if (candidateById.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
