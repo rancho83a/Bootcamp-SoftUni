@@ -18,7 +18,7 @@ public class BaseEntity {
     @CreatedDate
     private Date created;
     @LastModifiedDate
-    private Date modified;
+    private Date updated;
 
     @Enumerated(EnumType.STRING)
     private Status status;
