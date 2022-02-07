@@ -70,7 +70,7 @@
     </changeSet>
 
     <changeSet id="1.0.2" author="s.p.">
-        <createTable tableName="user_roles">
+        <createTable tableName="users_roles">
             <column name="user_id" type="BIGINT">
             </column>
 
