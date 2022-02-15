@@ -1,0 +1,28 @@
+<div class="theme-title" *ngIf="themes">
+
+    <!-- theme component  -->
+    <div *ngFor="let theme of themes" class="theme-container">
+        <div class="theme-name-wrapper">
+            <div class="theme-name">
+                <a href="#" class="normal">
+                    <h2>{{theme.name}}</h2>
+                </a>
+                <div class="columns">
+                    <div>
+                        <p>Date: <time>{{theme.id}}</time></p>
+                        <div class="nick-name">
+                            <p>Username: <span>{{theme.email}}</span></p>
+                        </div>
+                    </div>
+                    <div class="subscribers">
+                        <!-- <button class="subscribe">Subscribe</button> -->
+                        <p>Subscribers: <span>{{theme.body.length}}</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div *ngIf="!themes">Loading...</div>

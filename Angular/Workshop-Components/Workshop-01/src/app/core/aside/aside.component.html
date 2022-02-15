@@ -1,0 +1,17 @@
+<aside>
+    <div class="aside">
+        <h2 class="title">
+            {{title}}
+        </h2>
+        <div *ngIf="items">
+            <div *ngFor="let item of items" class="aside-theme">
+                <a href="#">
+                    <h3>{{item.title.substring(0,20)}}</h3>
+                    <p>{{item.body.substring(0,30)}}}</p>
+                    <p><span>userId: {{item.userId}}</span></p>
+                </a>
+            </div>
+        </div>
+        <div *ngIf="!items"> Loading... </div>
+    </div>
+</aside>
