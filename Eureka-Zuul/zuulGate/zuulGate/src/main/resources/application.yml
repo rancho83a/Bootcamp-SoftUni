@@ -1,0 +1,16 @@
+server:
+    port: 8020
+spring:
+    application:
+        name: zuul-service-api-gate
+zuul:
+#    prefix: /api
+    routes:
+        myhome:
+            path: /myhome/**
+            serviceId: ClientAPI-2
+        welcome:
+            path: /welcome/**
+            serviceId: ClientAPI-1
+            stripPrefix: true
+
