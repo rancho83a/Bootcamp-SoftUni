@@ -4,7 +4,7 @@ spring:
     application:
         name: zuul-service-api-gate
 zuul:
-#    prefix: /api
+    prefix: /api
     routes:
         myhome:
             path: /myhome/**
@@ -13,4 +13,24 @@ zuul:
             path: /welcome/**
             serviceId: ClientAPI-1
             stripPrefix: true
+
+#        client1:
+#            url: http://localhost:7777
+
+
+
+
+    host:
+        connect-timeout-millis: 2000
+        socket-timeout-millis: 5000
+
+
+management:
+    endpoints:
+        web:
+            exposure:
+                include: '*'
+    endpoint:
+        health:
+            show-details: ALWAYS
 
