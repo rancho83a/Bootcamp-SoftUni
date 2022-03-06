@@ -1,4 +1,32 @@
-<h1>POPULAR MOVIES </h1>
+<div class="row " *ngIf="message">
+    <div class="row">
+        <div class="col-lg-4">ID - number:</div>
+        <div class="col-lg-4">
+            <h1>{{message}}</h1>
+        </div>
+        <div class="col-lg-4"></div>
+    </div>
+</div>
+
+
+<h1> BEST DRAMA MOVIES </h1>
+<div class="row">
+
+    <div class="col-lg-2" *ngFor="let movie of dramaMovie">
+        <app-movie [movie]="movie" (clickButtonEmitter)="fromChild($event)"></app-movie>
+    </div>
+</div>
+
+<h1> KIDS MOVIES </h1>
+<div class="row">
+
+    <div class="col-lg-2" *ngFor="let movie of kidsMovie">
+        <app-movie [movie]="movie" (clickButtonEmitter)="fromChild($event)"></app-movie>
+    </div>
+</div>
+
+
+<h1> POPULAR MOVIES </h1>
 <div class="row">
 
     <div class="col-lg-2" *ngFor="let movie of popularMovie">
@@ -8,19 +36,7 @@
 
 <h1>MOVIES IN THEATRE </h1>
 <div class=" row ">
-
-
     <div class="col-lg-2 " *ngFor="let movie of inTheatreMovie ">
         <app-movie [movie]="movie " (clickButtonEmitter)="fromChild($event) "></app-movie>
-    </div>
-</div>
-
-<div class="row " *ngIf="message">
-    <div class="row">
-        <div class="col-lg-4"></div>
-        <div class="col-lg-4">
-            <h1>{{message}}</h1>
-        </div>
-        <div class="col-lg-4"></div>
     </div>
 </div>

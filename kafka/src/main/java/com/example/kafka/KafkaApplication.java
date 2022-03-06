@@ -13,11 +13,11 @@ public class KafkaApplication {
 		SpringApplication.run(KafkaApplication.class, args);
 	}
 
-	@Bean
+	//@Bean
 	CommandLineRunner commandLineRunner(KafkaTemplate<String, String> kafkaTemplate){
 		return args->{
 			for (int i=1; i<=10; i++) {
-				kafkaTemplate.send("newSpringTopic", i+"nd msg - hello kafka");
+				kafkaTemplate.send("business_owner_info", i+"nd msg - hello kafka");
 			}
 		};
 	}

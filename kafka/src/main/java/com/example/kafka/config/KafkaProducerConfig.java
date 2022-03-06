@@ -1,8 +1,11 @@
 package com.example.kafka.config;
 
+import com.example.kafka.model.BODto;
 import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.common.protocol.ObjectSerializationCache;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.jackson.JsonObjectSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
@@ -28,13 +31,13 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public ProducerFactory<String, String> producerFactory(){
+    public ProducerFactory<String, BODto> producerFactory(){
         return new DefaultKafkaProducerFactory<>(produceConfig());
     }
 
     @Bean
-    public KafkaTemplate<String, String> kafkaTemplate(
-            ProducerFactory<String, String> producerFactory
+    public KafkaTemplate<String, BODto> kafkaTemplate(
+            ProducerFactory<String, BODto> producerFactory
     ){
         return new KafkaTemplate<>(producerFactory);
     }

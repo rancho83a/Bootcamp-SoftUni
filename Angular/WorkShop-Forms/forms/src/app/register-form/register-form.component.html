@@ -1,0 +1,78 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+            <h1>Registration Form</h1>
+
+            <form #form="ngForm" (submit)="register(form)">
+                <pre>{{form.value |json}}</pre>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                    </div>
+                    <input pattern= "[A-Z][a-z]+\s[A-Z][a-z]+" name="fullName" class="form-control" placeholder="Full Name" ngModel required>
+                </div>
+                <div class="alert alert-danger" *ngIf="form.controls['fullName'].touched && form.controls['fullName'].errors?.['required']">The fullname is required</div>
+                <div class="alert alert-danger" *ngIf="form.controls['fullName'].touched && form.controls['fullName'].errors?.['pattern']">The fullname must contain 2 names with space </div>
+                <div class="form-group input-group ">
+                    <div class="input-group-prepend ">
+                        <span class="input-group-text "> <i class="fa fa-envelope "></i> </span>
+                    </div>
+                    <input 
+                    pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+                    name="email" ngModel class="form-control " placeholder="Email Address " type="email" required>
+                </div>
+
+                <div class="alert alert-danger" *ngIf="form.controls['email'].touched && form.controls['email'].errors?.['required']">The email is required</div>
+                <div class="alert alert-danger" *ngIf="form.controls['email'].errors?.['pattern']">Provide valid email </div>
+
+
+                <div class="form-group input-group ">
+                    <div class="input-group-prepend ">
+                        <span class="input-group-text "> <i class="fa fa-phone "></i> </span>
+                    </div>
+                    <select class="custom-select " style="max-width: 120px; ">
+             <option value="{{number}}"  *ngFor="let number of phoneNumbers">{{number}}</option>
+            </select>
+                    <input 
+                    pattern="(\d){9}"
+                    name="phoneNumber" ngModel class="form-control " placeholder="Phone number" type="text" >
+                </div>
+
+                <div class="alert alert-danger" *ngIf="form.controls['phoneNumber'].touched && form.controls['phoneNumber'].errors?.['required']">The phonenumber is required</div>
+                <div class="alert alert-danger" *ngIf="form.controls['phoneNumber'].errors?.['pattern']">Provide 9  digits only </div>
+
+
+
+
+                <div class="form-group input-group ">
+                    <div class="input-group-prepend ">
+                        <span class="input-group-text "> <i class="fa fa-building "></i> </span>
+                    </div>
+                    <select name="jobTitle" ngModel class="form-control" required>
+              <option value="Designer ">Designer</option>
+              <option value="Manager ">Manager</option>
+              <option value="Accounting ">Accounting</option>
+            </select>
+                </div>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-lock "></i> </span>
+                    </div>
+                    <input name="password" ngModel class="form-control" placeholder="Create password " type="password" required>
+                </div>
+                <div class="form-group input-group ">
+                    <div class="input-group-prepend ">
+                        <span class="input-group-text "> <i class="fa fa-lock "></i> </span>
+                    </div>
+                    <input name="confirmPassword" ngModel class="form-control " placeholder="Repeat password " type="password" required>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block"> Create Account </button>
+                </div>
+                <p class="text-center ">Have an account? <a href=" ">Log In</a> </p>
+            </form>
+        </div>
+        <div class="col-lg-4 "></div>
+    </div>
+</div>

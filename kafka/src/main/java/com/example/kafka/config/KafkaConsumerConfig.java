@@ -1,5 +1,6 @@
 package com.example.kafka.config;
 
+import com.example.kafka.model.BODto;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
