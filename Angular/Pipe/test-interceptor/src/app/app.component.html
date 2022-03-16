@@ -1,0 +1,10 @@
+<div>
+  Current Date is:  {{now | date : 'dd/MM/yyyy'}}
+  <br>
+  {{obj | json}}
+</div>
+
+
+<app-user-list *ngIf="(users$ | async) && (posts$ | async)" [users]="(users$ | async)" [posts]="(posts$ | async)"></app-user-list>
+
+<!-- <button (click)="clickHandler()">Add POST</button> -->

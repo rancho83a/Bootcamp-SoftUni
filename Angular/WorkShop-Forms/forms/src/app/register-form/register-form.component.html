@@ -10,10 +10,10 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                     </div>
-                    <input pattern= "[A-Z][a-z]+\s[A-Z][a-z]+" name="fullName" class="form-control" placeholder="Full Name" ngModel required>
+                    <input pattern= "[A-Z][a-z]+\s[A-Z][a-z]+" name="fullName" class="form-control" placeholder="FullName" [(ngModel)]="model" required>
                 </div>
-                <div class="alert alert-danger" *ngIf="form.controls['fullName'].touched && form.controls['fullName'].errors?.['required']">The fullname is required</div>
-                <div class="alert alert-danger" *ngIf="form.controls['fullName'].touched && form.controls['fullName'].errors?.['pattern']">The fullname must contain 2 names with space </div>
+                <div class="alert alert-danger" *ngIf="form.controls['fullName']?.touched && form.controls['fullName'].errors?.['required']">The fullname is required</div>
+                <div class="alert alert-danger" *ngIf="form.controls['fullName']?.touched && form.controls['fullName'].errors?.['pattern']">The fullname must contain 2 names with space </div>
                 <div class="form-group input-group ">
                     <div class="input-group-prepend ">
                         <span class="input-group-text "> <i class="fa fa-envelope "></i> </span>
@@ -23,8 +23,8 @@
                     name="email" ngModel class="form-control " placeholder="Email Address " type="email" required>
                 </div>
 
-                <div class="alert alert-danger" *ngIf="form.controls['email'].touched && form.controls['email'].errors?.['required']">The email is required</div>
-                <div class="alert alert-danger" *ngIf="form.controls['email'].errors?.['pattern']">Provide valid email </div>
+                <div class="alert alert-danger" *ngIf="form.controls['email']?.touched && form.controls['email'].errors?.['required']">The email is required</div>
+                <div class="alert alert-danger" *ngIf="form.controls['email']?.errors?.['pattern']">Provide valid email </div>
 
 
                 <div class="form-group input-group ">
@@ -36,39 +36,64 @@
             </select>
                     <input 
                     pattern="(\d){9}"
-                    name="phoneNumber" ngModel class="form-control " placeholder="Phone number" type="text" >
+                    name="phoneNumber" ngModel class="form-control " placeholder="Phone number" type="text" required>
                 </div>
 
-                <div class="alert alert-danger" *ngIf="form.controls['phoneNumber'].touched && form.controls['phoneNumber'].errors?.['required']">The phonenumber is required</div>
-                <div class="alert alert-danger" *ngIf="form.controls['phoneNumber'].errors?.['pattern']">Provide 9  digits only </div>
-
-
-
+                <div class="alert alert-danger" *ngIf="form.controls['phoneNumber']?.touched && form.controls['phoneNumber']?.errors?.['required']">The phonenumber is required</div>
+                <div class="alert alert-danger" *ngIf="form.controls['phoneNumber']?.errors?.['pattern']">Provide 9  digits only </div>
 
                 <div class="form-group input-group ">
                     <div class="input-group-prepend ">
                         <span class="input-group-text "> <i class="fa fa-building "></i> </span>
                     </div>
                     <select name="jobTitle" ngModel class="form-control" required>
+              <option disabled>Choose one of options below</option>
               <option value="Designer ">Designer</option>
               <option value="Manager ">Manager</option>
               <option value="Accounting ">Accounting</option>
             </select>
                 </div>
-                <div class="form-group input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"> <i class="fa fa-lock "></i> </span>
-                    </div>
-                    <input name="password" ngModel class="form-control" placeholder="Create password " type="password" required>
-                </div>
-                <div class="form-group input-group ">
-                    <div class="input-group-prepend ">
-                        <span class="input-group-text "> <i class="fa fa-lock "></i> </span>
-                    </div>
-                    <input name="confirmPassword" ngModel class="form-control " placeholder="Repeat password " type="password" required>
-                </div>
+                <div class="alert alert-danger" *ngIf="form.controls['jobTitle']?.touched && form.controls['jobTitle']?.errors?.['required']">The job title is required</div>
+
+    <fieldset ngModelGroup="passwords">
+
+        <div class="form-group input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-lock "></i> </span>
+        </div>
+        <input name="password" ngModel class="form-control" placeholder="Create password" type="password" required
+        pattern="[\w+| ]+">
+    </div>
+
+    <div class="alert alert-danger" *ngIf="form.controls['passwords']?.touched">The password is required</div>
+    <!-- <div class="alert alert-danger" *ngIf="form?.controls['passwords']?.controls.errors['pattern']">The password is required</div> -->
+
+
+
+    <div class="form-group input-group ">
+        <div class="input-group-prepend ">
+            <span class="input-group-text "> <i class="fa fa-lock "></i> </span>
+        </div>
+        <input name="confirmPassword" ngModel class="form-control " placeholder="Repeat password " type="password" required>
+    </div>
+</fieldset>
+
+<div class="form-group input-group ">
+    <div class="input-group-prepend ">
+        <span class="input-group-text "> <i class="fa fa-image "></i> </span>
+    </div>
+    <input 
+    name="imageUrl" appImageUrlV ngModel class="form-control " placeholder="Image Url" type="url" required>
+</div>
+
+<div class="alert alert-danger" *ngIf="form.errors"> The link is wrong
+
+</div>
+
+
                 <div class="form-group">
-                    <button class="btn btn-primary btn-block"> Create Account </button>
+                    <button  class="btn btn-primary btn-block" > Create Account </button>
+                    <!-- [disabled]="form.invalid" -->
                 </div>
                 <p class="text-center ">Have an account? <a href=" ">Log In</a> </p>
             </form>

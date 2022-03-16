@@ -1,0 +1,8 @@
+<ul>
+    <li *ngFor="let user of users; let i=index">
+  First name: {{user.firstName}} |
+   <!-- Post count: {{getUserPostCount(user.id)}} -->
+   Post count: {{posts! | postCount : user.id : i}}
+  
+    </li>
+  </ul>

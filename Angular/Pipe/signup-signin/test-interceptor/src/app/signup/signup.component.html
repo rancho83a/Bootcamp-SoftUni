@@ -1,0 +1,18 @@
+<form #form="ngForm" (ngSubmit)="submitHandler(form)">
+    <div clas="form-group">
+        <label for="email">Email: </label>
+        <input id="email" type="email" ngModel name="email" required email>
+    </div>
+
+    <div clas="form-group">
+        <label for="password">Password: </label>
+        <input id="password" type="password" ngModel name="password" required [minlength]="5">
+    </div>
+
+    <div clas="form-group">
+        <label for="name">Name: </label>
+        <input id="name" type="text" ngModel name="name" required>
+    </div>
+
+    <button [disabled]="form.invalid">SignUp</button>
+</form>

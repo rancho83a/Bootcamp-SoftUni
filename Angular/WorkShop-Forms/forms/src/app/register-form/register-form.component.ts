@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -6,18 +6,23 @@ import { NgForm } from '@angular/forms';
   templateUrl: './register-form.component.html',
   styleUrls: ['./register-form.component.css']
 })
-export class RegisterFormComponent implements OnInit {
+export class RegisterFormComponent  {
 
   phoneNumbers: string[] = ['+359', '+721', '+231'];
+  @ViewChild('form')
+  htmlForm!: NgForm;
+  model={}
 
-  constructor() { }
+  constructor() {
+   }
 
-  ngOnInit(): void {
-  }
-
-  register(formData: any) : void{
-   // if(form.invalid){return}
-    console.log(formData);
+ 
+  register(formData:NgForm) : void{
+    // if(this.htmlForm.invalid){
+    //   return;
+    // }
+  //  this.htmlForm.reset();
+    console.log(formData)
 
   }
 }
